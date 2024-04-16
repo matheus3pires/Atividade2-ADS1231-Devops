@@ -7,6 +7,87 @@ from cadastro_clientes import CadastroClientes
 
 class Main:
     def __init__(self):
+        self.cadastro_clientes = CadastroClientes()
+
+    def adicionar_cliente(self):
+        nome = input("Digite o nome do cliente: ")
+        email = input("Digite o email do cliente: ")
+        telefone = input("Digite o telefone do cliente: ")
+        cliente = Cliente(nome, email, telefone)
+        self.cadastro_clientes.adicionar_cliente(cliente)
+        print("Cliente adicionado com sucesso!")
+
+    def visualizar_clientes(self):
+        print(self.cadastro_clientes.visualizar_clientes())
+
+    def atualizar_cliente(self):
+        nome = input("Digite o nome do cliente: ")
+        email = input("Digite o email do cliente: ")
+        telefone = input("Digite o telefone do cliente: ")
+        cliente = Cliente(nome, email, telefone)
+        try:
+            index = int(input("Digite o índice do cliente a ser atualizado: "))
+            if 0 <= index < len(self.cadastro_clientes.get_cliente_list()):
+                self.cadastro_clientes.atualizar_cliente(index, cliente)
+        except ValueError:
+            print("Índice inválido. Digite um número inteiro.")
+
+    def excluir_cliente(self):
+        try:
+            index = int(input("Digite o índice do cliente a ser excluído: "))
+            if 0 <= index < len(self.cadastro_clientes.get_cliente_list()):
+                self.cadastro_clientes.excluir_cliente(index)
+        except ValueError:
+            print("Índice inválido. Digite um número inteiro.")
+
+    def salvar_clientes(self):
+        file_path = "clientes.txt"
+        try:
+            with open(file_path, "a") as file:
+                for cliente in self.cadastro_clientes.get_cliente_list():
+                    file.write(str(cliente))
+                    file.write("\n")
+            print("Clientes salvos com sucesso no arquivo clientes.txt!")
+        except IOError:
+            print("Erro ao salvar clientes no arquivo!")
+
+
+if __name__ == "__main__":
+    main = Main()
+    while True:
+        print("x-------------------------------------x");
+        print("|Escolha uma opção:                   |");
+        print("|1 - Adicionar cliente                |");
+        print("|2 - Visualizar clientes              |");
+        print("|3 - Atualizar cliente                |");
+        print("|4 - Excluir cliente                  |");
+        print("|5 - Salvar clientes em arquivo       |");
+        print("|0 - Sair                             |");
+        print("x-------------------------------------x");
+
+        opcao = input("Opção: ")
+
+        if opcao == "0":
+            print("Saindo...")
+            break
+        elif opcao == "1":
+            main.adicionar_cliente()
+        elif opcao == "2":
+            main.visualizar_clientes()
+        elif opcao == "3":
+            main.atualizar_cliente()
+        elif opcao == "4":
+            main.excluir_cliente()
+        elif opcao == "5":
+            main.salvar_clientes()
+        else:
+            print("Opção inválida!")
+
+# Interface Grafica:
+
+"""
+class Main:
+    def __init__(self):
         self.root = Tk()
         self.root.title("Cadastro de Clientes")
 
@@ -95,3 +176,5 @@ class Main:
 
 if __name__ == "__main__":
     Main()
+
+"""   

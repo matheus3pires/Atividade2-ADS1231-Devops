@@ -1,18 +1,111 @@
 package AtividadeJava;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
+//import javax.swing.*;
+//import javax.swing.border.TitledBorder;
 
-import java.awt.*;
-import java.awt.event.*;
+//import java.awt.*;
+//import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
+public class Main {
+
+    public static void main(String[] args) {
+        CadastroClientes cadastroClientes = new CadastroClientes();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("x-------------------------------------x");
+            System.out.println("|Escolha uma opção:                   |");
+            System.out.println("|1 - Adicionar cliente                |");
+            System.out.println("|2 - Visualizar clientes              |");
+            System.out.println("|3 - Atualizar cliente                |");
+            System.out.println("|4 - Excluir cliente                  |");
+            System.out.println("|5 - Salvar clientes em arquivo       |");
+            System.out.println("|0 - Sair                             |");
+            System.out.println("x-------------------------------------x");
+            
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); 
+            
+            switch (opcao) {
+                case 0:
+                System.out.println("Saindo...");
+                return;
+                case 1:
+                    System.out.println("Digite o nome do cliente:");
+                    String nome = scanner.nextLine();
+                    System.out.println("Digite o email do cliente:");
+                    String email = scanner.nextLine();
+                    System.out.println("Digite o telefone do cliente:");
+                    String telefone = scanner.nextLine();
+                    Cliente novoCliente = new Cliente(nome, email, telefone);
+                    cadastroClientes.adicionarCliente(novoCliente);
+                    System.out.println("Cliente adicionado com sucesso!");
+                    break;
+                case 2:
+                    System.out.println(cadastroClientes.visualizarClientes());
+                    break;
+                case 3:
+                    System.out.println("Digite o índice do cliente a ser atualizado:");
+                    int indiceAtualizar = scanner.nextInt();
+                    scanner.nextLine(); 
+                    if (indiceAtualizar >= 0 && indiceAtualizar < cadastroClientes.getClienteList().size()) {
+                        System.out.println("Digite o novo nome do cliente:");
+                        nome = scanner.nextLine();
+                        System.out.println("Digite o novo email do cliente:");
+                        email = scanner.nextLine();
+                        System.out.println("Digite o novo telefone do cliente:");
+                        telefone = scanner.nextLine();
+                        Cliente clienteAtualizado = new Cliente(nome, email, telefone);
+                        cadastroClientes.atualizarCliente(indiceAtualizar, clienteAtualizado);
+                    } else {
+                        System.out.println("Índice inválido. Cliente não encontrado.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Digite o índice do cliente a ser excluído:");
+                    int indiceExcluir = scanner.nextInt();
+                    scanner.nextLine(); 
+                    if (indiceExcluir >= 0 && indiceExcluir < cadastroClientes.getClienteList().size()) {
+                        cadastroClientes.excluirCliente(indiceExcluir);
+
+                    } else {
+                        System.out.println("Índice inválido. Cliente não encontrado.");
+                    }
+                    break;
+                case 5:
+                    Path caminho = Paths.get("clientes.txt");
+                    try {
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(caminho.toString(), true));
+                        
+                        for (Cliente cliente : cadastroClientes.getClienteList()) {
+                            writer.write(cliente.toString());
+                            writer.newLine();
+                        }
+                        
+                        writer.close();
+                        System.out.println("Clientes salvos com sucesso no arquivo clientes.txt!");
+                    } catch (IOException ex) {
+                        System.out.println("Erro ao salvar clientes no arquivo!");
+                    }
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+    }   
+}
+
+
+// Interface Grafica:
+
+/* 
 public class Main extends JFrame implements ActionListener {
-
     public static void main(String[] args) {
         new Main(); 
     }
@@ -146,4 +239,6 @@ public class Main extends JFrame implements ActionListener {
             }
         }    
     }
+    
 }
+*/
