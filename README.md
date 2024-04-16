@@ -20,6 +20,37 @@ Este é um programa feito em Java e Python para gerenciar clientes em um sistema
 - Para excluir um cliente, clique no botão "Excluir" e siga as instruções fornecidas.
 - Para salvar a lista de clientes em um arquivo de texto, clique no botão "Salvar".
 
+## Instruções de Uso Docker Java
+1. Navegue para o Diretório do Projeto.
+2. Construa a Imagem Docker:
+   
+        docker build -t atividade-java . 
+       
+3. Execute o Container Docker:
+   
+        docker run -it atividade-java 
+       
+4. Interaja com o programa:
+   * Uma vez que o container esteja em execução, você poderá interagir com o seu aplicativo Java usando o terminal.  Siga as instruções no console para usar os recursos do programa de gerenciamento de clientes.
+
+![Captura de tela 2024-04-16 152000](https://github.com/matheus3pires/Atividade2-ADS1231-Devops/assets/87993331/36f17dc4-6f91-49a6-8bb8-41ac1074ece2)
+
+## Instruções de Uso Docker Python
+1. Navegue para o Diretório do Projeto.
+2. Construa a Imagem Docker:
+   
+        docker build -t atividade-python . 
+       
+3. Execute o Container Docker:
+   
+        docker run -it atividade-python
+       
+4. Interaja com o programa:
+   * Uma vez que o container esteja em execução, você poderá interagir com o seu aplicativo Python usando o terminal.  Siga as instruções no console para usar os recursos do programa de gerenciamento de clientes.
+
+![Captura de tela 2024-04-16 155235](https://github.com/matheus3pires/Atividade2-ADS1231-Devops/assets/87993331/16762459-26df-4031-b15a-c5be982f4981)
+
+
 ## Print de execução
 
 ![Captura de tela 2024-03-24 165814](https://github.com/matheus3pires/Atividade2-ADS1231-Devops/assets/87993331/9c10b01a-ba10-4e55-8358-134ecc422376)
